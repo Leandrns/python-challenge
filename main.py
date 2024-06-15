@@ -1,4 +1,4 @@
-def forca_opcao(lista_opcoes, msg):
+def forca_opcao(lista_opcoes, msg): #Forçar o usuário a escolher uma opção
     msg_erro = '\n'.join(lista_opcoes)
     opcao = input(msg)
     while opcao not in lista_opcoes:
@@ -6,13 +6,13 @@ def forca_opcao(lista_opcoes, msg):
         opcao = input(msg)
     return opcao
 
-def meu_index(lista, elemento):
+def meu_index(lista, elemento): #Encontrar um indice dentro de uma lista
     for i in range(len(lista)):
         if lista[i] == elemento:
             return i
     return
 
-def tem_saldo(saldo, custo):
+def tem_saldo(saldo, custo): #Verificar se o usuário ainda tem saldo suficiente
     if custo < saldo:
         return True
     print("Quantidade de créditos insuficente, escolha outra opção!")
@@ -27,7 +27,7 @@ precos_pilotos = [17, 14, 9]
 pilotos_num = ["1", "2", "3"]
 
 creditos = 100
-while True:
+while True: #O usuário é apresentado a lista de pilotos e a sua quantidade atual de créditos, ao escolher um piloto a quantidade de créditos é retirada do usuário, e caso escolha uma opção que não exista ele é foeçado a responder corretamente, e se ele não tiver créditos suficientes, ele volta ao inicio do while. E por fim caso de certo, o piloto escolhido é removido.
     print("=== PILOTOS DISPONÍVEIS ===")
     for i in range(len(pilotos)):
         print(f"{pilotos_num[i]}) {pilotos[i]}, da {equipe_pilotos[i]} - {precos_pilotos[i]} créditos")
@@ -46,7 +46,7 @@ while True:
         pilotos_num.remove(pilotos_num[indice1])
         break
 
-while True:
+while True: #Bem parecido com a explicação dada anteriormente, o diferencial é que aqui não precisamos remover o piloto ainda não escolhido, já que a lista de pilotos não será apresentada novamente
     print("=== PILOTOS DISPONÍVEIS ===")
     for i in range(len(pilotos)):
         print(f"{pilotos_num[i]}) {pilotos[i]}, da {equipe_pilotos[i]} - {precos_pilotos[i]} créditos")
@@ -65,7 +65,7 @@ while True:
 equipes = ["Porsche", "Jaguar", "Mahindra", "Maserati", "McLaren"]
 equipes_num = ["1", "2", "3", "4", "5"]
 precos_equipes = [17, 15, 13, 12, 13]
-while True:
+while True: #O usuário é apresentado a lista de equipes e a sua quantidade atual de créditos, ao escolher uma equipe a quantidade de créditos é retirada do usuário, e caso escolha uma opção que não exista ele é foeçado a responder corretamente, e se ele não tiver créditos suficientes, ele volta ao inicio do while.
     print("=== EQUIPES DISPONÍVEIS ===")
     for i in range(len(equipes)):
         print(f"{equipes_num[i]}) {equipes[i]} - {precos_equipes[i]} créditos")
@@ -83,7 +83,7 @@ while True:
 motores = ["Porsche 99X Electric", "Mahindra M9Electro", "Jaguar I-Type 6"]
 motores_num = ["1", "2", "3"]
 precos_motores = [17, 11, 16]
-while True:
+while True: #A descrição do tópico anterior será aplicada também aos motores!
     print("=== MOTORES DISPONÍVEIS ===")
     for i in range(len(motores)):
         print(f"{motores_num[i]}) {motores[i]} - {precos_motores[i]} créditos")
@@ -102,7 +102,7 @@ tecnicos = ["Thomas Biermaier", "Frederic Bertrand", "Florian Modlinger"]
 tecnicos_equipe = ["ABT", "Mahindra", "Porsche"]
 tecnicos_num = ["1", "2", "3"]
 precos_tecnicos = [11, 12, 18]
-while True:
+while True: #A descrição do tópico retrasado será aplicada também aos técnicos!
     print("=== TÉCNICOS DISPONÍVEIS ===")
     for i in range(len(tecnicos)):
         print(f"{tecnicos_num[i]}) {tecnicos[i]}, da {tecnicos_equipe[i]} - {precos_tecnicos[i]} créditos")
@@ -117,7 +117,7 @@ while True:
         creditos -= preco_tecnico
         break
 
-print(f"Sua equipe, a {nome_equipe}, está escalada assim:\n"
+print(f"Sua equipe, a {nome_equipe}, está escalada assim:\n" #Um print mostrando todas as opções escolhidas pelo usuário e sua quantidade final de créditos.
       f"Piloto 1: {piloto1} - {preco_piloto1} créditos\n"
       f"Piloto 2: {piloto2} - {preco_piloto2} créditos\n"
       f"Equipe representante: {equipe} - {preco_equipe} créditos\n"
