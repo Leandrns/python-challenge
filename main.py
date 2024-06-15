@@ -36,7 +36,7 @@ while True:
     escolha_piloto1 = forca_opcao(pilotos_num, "Escolha o seu primeiro piloto (digite o número correspondente):\n-> ")
     indice1 = meu_index(pilotos_num, escolha_piloto1)
     if tem_saldo(creditos, precos_pilotos[indice1]):
-        piloto1 = pilotos[int(escolha_piloto1) - 1]
+        piloto1 = pilotos[indice1]
         print(f"Seu piloto 1 é o {piloto1}!\n")
         preco_piloto1 = precos_pilotos[indice1]
         creditos -= preco_piloto1
@@ -55,7 +55,7 @@ while True:
                                   "Escolha seu segundo piloto (digite o número correspondente):\n-> ")
     indice2 = meu_index(pilotos_num, escolha_piloto2)
     if tem_saldo(creditos, precos_pilotos[indice2]):
-        piloto2 = pilotos[int(escolha_piloto2) - 1]
+        piloto2 = pilotos[indice2]
         print(f"Seu piloto 2 é o {piloto2}!\n")
         preco_piloto2 = precos_pilotos[indice2]
         creditos -= preco_piloto2
@@ -73,7 +73,7 @@ while True:
                                  "Escolha uma equipe para representar (digite o número correspondente):\n-> ")
     indice_equipe = meu_index(equipes_num, escolha_equipe)
     if tem_saldo(creditos, precos_equipes[indice_equipe]):
-        equipe = equipes[int(escolha_equipe) - 1]
+        equipe = equipes[indice_equipe]
         print(f"Sua equipe é a {equipe}!\n")
         preco_equipe = precos_equipes[indice_equipe]
         creditos -= preco_equipe
@@ -91,7 +91,7 @@ while True:
                                 "Escolha um motor para seu carro (digite o número correspondente):\n-> ")
     indice_motor = meu_index(motores_num, escolha_motor)
     if tem_saldo(creditos, precos_motores[indice_motor]):
-        motor = motores[int(escolha_motor) - 1]
+        motor = motores[indice_motor]
         print(f"Seu motor é o {motor}!\n")
         preco_motor = precos_motores[indice_motor]
         creditos -= preco_motor
@@ -110,7 +110,7 @@ while True:
                                 "Escolha um técnico para a sua equipe (digite o número correspondente):\n-> ")
     indice_tecnico = meu_index(tecnicos_num, escolha_tecnico)
     if tem_saldo(creditos, precos_tecnicos[indice_tecnico]):
-        tecnico = tecnicos[int(escolha_tecnico) - 1]
+        tecnico = tecnicos[indice_tecnico]
         print(f"Seu tecnico é o {tecnico}!\n")
         preco_tecnico = precos_tecnicos[indice_tecnico]
         creditos -= preco_tecnico
