@@ -2,9 +2,11 @@
 <h2 align="center">Entrega da disciplina de Computational Thinking With Python</h2>
 <div align="center" width="100px">
 
-![Logo da empresa autora do projeto](logo_clirv.png)
+![image](https://github.com/Leandrns/python-challenge/assets/162051430/704013e4-e8d1-4782-ac57-2ac59443731b)
 
-<img src="hitrace.png" width="200px" alt="Logo do projeto"> 
+
+![image](https://github.com/Leandrns/python-challenge/assets/162051430/d646bbf7-64d9-4386-b640-1a82c17746a5)
+
 
 </div>
 
