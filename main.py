@@ -43,6 +43,7 @@ while True:
         pilotos.remove(pilotos[indice1])
         equipe_pilotos.remove(equipe_pilotos[indice1])
         precos_pilotos.remove(precos_pilotos[indice1])
+        pilotos_num.remove(pilotos_num[indice1])
         break
 
 while True:
