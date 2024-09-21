@@ -163,3 +163,23 @@ E nossa solução foi desenvolver um site com uma interface rica em informaçõe
 
 <p>Após a corrida, o usuário poderá visualizar seu total de pontos acumulados e um ranking que compara seu desempenho com outros usuários do "HitRace Fantasy FE". Essa comparação incentiva a otimização das escolhas e estratégias a cada corrida.</p>
 
+
+### Bibliotecas Usado no projeto
+
+
+<p>Biblioteca random</p>
+
+- <p>Para criar eventos aleatórios durante o jogo, como definir resultados de corridas.</p>
+
+<p>Biblioteca Matplotlib</p>
+
+- <p>Para visualizar as estatísticas de desempenho dos usuários após algumas corridas.</p>
+
+
+<p>Biblioteca Pandas</p>
+
+- <p>Para armazenar e manipular dados sobre os pilotos, equipes e pontuações, permitindo uma análise mais fácil e organizada.</p>
+
+<p>Blioteca time</p>
+
+- <p>Para criar delays na execução do jogo, aumentando a imersão e a expectativa dos jogadores.</p>
