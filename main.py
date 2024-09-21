@@ -1,16 +1,16 @@
-def forca_opcao(lista_opcoes, msg): #Forçar o usuário a escolher uma opção
-    msg_erro = '\n'.join(lista_opcoes)
+import random
+import matplotlib.pyplot as plt
+import pandas as pd
+import time
+from colorama import Fore, Back, Style, init
+init()
+
+def forca_opcao(lista_opcoes, msg, msg_erro): #Forçar o usuário a escolher uma opção
     opcao = input(msg)
     while opcao not in lista_opcoes:
-        print(f"Opção inválida! Somente essas:\n{msg_erro}")
+        print(Fore.RED + "Opção inválida! Somente essas:\n" + Style.RESET_ALL + f"{msg_erro}")
         opcao = input(msg)
     return opcao
-
-def meu_index(lista, elemento): #Encontrar um indice dentro de uma lista
-    for i in range(len(lista)):
-        if lista[i] == elemento:
-            return i
-    return
 
 def tem_saldo(saldo, custo): #Verificar se o usuário ainda tem saldo suficiente
     if custo < saldo:
@@ -18,109 +18,199 @@ def tem_saldo(saldo, custo): #Verificar se o usuário ainda tem saldo suficiente
     print("Quantidade de créditos insuficente, escolha outra opção!")
     return False
 
-print("====== Seja bem-vindo(a) ao HitRace Fantasy Formula E ======")
-nome_equipe = input("Escolha um nome para a sua equipe:\n-> ")
+def gerar_pontuacao():
+    return random.randint(50, 100)
 
-pilotos = ["Mitch EVANS", "Antônio Felix DA COSTA", "Nyck DE VRIES"]
-equipe_pilotos = ["Jaguar", "Porsche", "Mahindra"]
-precos_pilotos = [17, 14, 9]
-pilotos_num = ["1", "2", "3"]
+# Função para calcular a pontuação final do jogador
+def calcular_pontuacao_final(escolhas):
+    # Gerando pontuação para cada elemento
+    pontuacao_total = 0
+    print(Style.BRIGHT + "===== PONTUAÇÕES =====" + Style.RESET_ALL)
+    for key in escolhas.keys():
+        for indice in range(len(escolhas[key])):
+            pontuacao = gerar_pontuacao()
+            print(f"{escolhas[key][indice]}: {pontuacao} pontos")
+            pontuacao_total += pontuacao
+
+    return pontuacao_total
+
+def ordenar_ranking(jogadores, pontuacoes):
+    # Cria uma lista de pares (jogador, pontuação)
+    ranking = []
+    for i in range(len(jogadores)):
+        ranking.append([jogadores[i], pontuacoes[i]])
+
+    # Implementação do algoritmo Bubble Sort
+    n = len(ranking)
+    for i in range(n):
+        for j in range(0, n - i - 1):
+            # Se a pontuação atual for menor que a próxima, troca as posições
+            if ranking[j][1] < ranking[j + 1][1]:
+                ranking[j], ranking[j + 1] = ranking[j + 1], ranking[j]
+
+    return ranking
+
+def gerar_ranking(jogador_pontuacao):
+    jogadores_ficticios = ["Jogador 1", "Jogador 2", "Jogador 3", "Jogador 4", "Jogador 5"]
+    pontuacoes_ficticias = []
+    for _ in range(len(jogadores_ficticios)):
+        pontuacoes_ficticias.append(random.randint(200, 350))
+
+    # Incluindo a pontuação do jogador no ranking
+    jogadores_ficticios.append(Fore.LIGHTCYAN_EX +"Você"+Style.RESET_ALL)
+    pontuacoes_ficticias.append(jogador_pontuacao)
+
+    # Ordenando o ranking pela pontuação
+    ranking = ordenar_ranking(jogadores_ficticios, pontuacoes_ficticias)
+
+    # Exibe o ranking ordenado
+    print(Style.BRIGHT +"\nRanking final:"+ Style.RESET_ALL)
+    for i in range(len(ranking)):
+        print(Style.BRIGHT +f"{i + 1}."+ Style.RESET_ALL + f" {ranking[i][0]} - {ranking[i][1]} pontos")
+
+    return ranking
+
+def escolhendo_elemento(creditos, chave):
+    while True:
+        tabela = pd.DataFrame(escolhas_hitrace[chave])
+        print(tabela)
+
+        indices = []
+        for i in range(len(escolhas_hitrace[chave]['nomes'])):
+            indices.append(str(i))
+
+        escolha = forca_opcao(indices,
+                              "Escolha uma das opções (digite o número correspondente):\n-> ",
+                              tabela)
+        indice = int(escolha)
+        if tem_saldo(creditos, escolhas_hitrace[chave]['precos'][indice]):
+            elemento = escolhas_hitrace[chave]['nomes'][indice]
+            escolhas_usuario[chave].append(elemento)
+            preco = escolhas_hitrace[chave]['precos'][indice]
+            creditos -= preco
+            print(Fore.YELLOW +f"Você possui {creditos} créditos."+ Style.RESET_ALL)
+            return [elemento, indice, preco, creditos]
+
+
+escolhas_hitrace = {
+    #Área de Pilotos
+    "pilotos": {
+        'nomes' : ["Mitch EVANS", "Antônio Felix DA COSTA", "Nyck DE VRIES"],
+        'equipes' : ["Jaguar", "Porsche", "Mahindra"],
+        'precos' : [17, 14, 9],
+    },
+
+    #Área de Equipes
+    "equipes": {
+        'nomes' : ["Porsche", "Jaguar", "Mahindra", "Maserati", "McLaren"],
+        'precos' : [17, 15, 13, 12, 13],
+    },
+
+    #Área de Motores
+    "motores": {
+        'nomes' : ["Porsche 99X Electric", "Mahindra M9Electro", "Jaguar I-Type 6"],
+        'precos' : [17, 11, 16],
+    },
+
+    #Área de Técnicos
+    "técnicos": {
+        'nomes' : ["Thomas Biermaier", "Frederic Bertrand", "Florian Modlinger"],
+        'equipes' : ["ABT", "Mahindra", "Porsche"],
+        'precos' : [11, 12, 18],
+    }
+}
+
+print(Fore.BLUE + "====== Seja bem-vindo(a) ao HitRace Fantasy Formula E ======"+ Style.RESET_ALL)
+nome_equipe = input("Digite um nome para a sua equipe:\n-> ")
 
 creditos = 100
-while True: #O usuário é apresentado a lista de pilotos e a sua quantidade atual de créditos, ao escolher um piloto a quantidade de créditos é retirada do usuário, e caso escolha uma opção que não exista ele é foeçado a responder corretamente, e se ele não tiver créditos suficientes, ele volta ao inicio do while. E por fim caso de certo, o piloto escolhido é removido.
-    print("=== PILOTOS DISPONÍVEIS ===")
-    for i in range(len(pilotos)):
-        print(f"{pilotos_num[i]}) {pilotos[i]}, da {equipe_pilotos[i]} - {precos_pilotos[i]} créditos")
-    print(f"Você possui {creditos} créditos.")
+print(Fore.YELLOW +f"Você recebeu {creditos} créditos iniciais."+ Style.RESET_ALL)
+escolhas_usuario = {
+    "pilotos": [],
+    "equipes": [],
+    "motores": [],
+    "técnicos": []
+}
+#O usuário é apresentado a lista de pilotos e a sua quantidade atual de créditos, ao escolher um piloto a
+# quantidade de créditos é retirada do usuário, e caso escolha uma opção que não exista ele é forçado a responder
+# corretamente, e se ele não tiver créditos suficientes, ele volta ao inicio do while. E por fim caso de certo, o piloto escolhido é removido.
 
-    escolha_piloto1 = forca_opcao(pilotos_num, "Escolha o seu primeiro piloto (digite o número correspondente):\n-> ")
-    indice1 = meu_index(pilotos_num, escolha_piloto1)
-    if tem_saldo(creditos, precos_pilotos[indice1]):
-        piloto1 = pilotos[indice1]
-        print(f"Seu piloto 1 é o {piloto1}!\n")
-        preco_piloto1 = precos_pilotos[indice1]
-        creditos -= preco_piloto1
-        pilotos.remove(pilotos[indice1])
-        equipe_pilotos.remove(equipe_pilotos[indice1])
-        precos_pilotos.remove(precos_pilotos[indice1])
-        pilotos_num.remove(pilotos_num[indice1])
-        break
 
-while True: #Bem parecido com a explicação dada anteriormente, o diferencial é que aqui não precisamos remover o piloto ainda não escolhido, já que a lista de pilotos não será apresentada novamente
-    print("=== PILOTOS DISPONÍVEIS ===")
-    for i in range(len(pilotos)):
-        print(f"{pilotos_num[i]}) {pilotos[i]}, da {equipe_pilotos[i]} - {precos_pilotos[i]} créditos")
-    print(f"Você possui {creditos} créditos.")
+print(Style.BRIGHT + "=== PILOTOS DISPONÍVEIS ==="+ Style.RESET_ALL)
+escolha_piloto1 = escolhendo_elemento(creditos, 'pilotos')
+piloto1 = escolha_piloto1[0]
+indice1 = escolha_piloto1[1]
+preco_piloto1 = escolha_piloto1[2]
+creditos = escolha_piloto1[3]
+for key in escolhas_hitrace['pilotos'].keys():
+    escolhas_hitrace['pilotos'][key].remove(escolhas_hitrace['pilotos'][key][indice1])
+print(f"Seu piloto 1 é o " + Style.BRIGHT + f"{piloto1}!\n" + Style.RESET_ALL)
 
-    escolha_piloto2 = forca_opcao(pilotos_num,
-                                  "Escolha seu segundo piloto (digite o número correspondente):\n-> ")
-    indice2 = meu_index(pilotos_num, escolha_piloto2)
-    if tem_saldo(creditos, precos_pilotos[indice2]):
-        piloto2 = pilotos[indice2]
-        print(f"Seu piloto 2 é o {piloto2}!\n")
-        preco_piloto2 = precos_pilotos[indice2]
-        creditos -= preco_piloto2
-        break
 
-equipes = ["Porsche", "Jaguar", "Mahindra", "Maserati", "McLaren"]
-equipes_num = ["1", "2", "3", "4", "5"]
-precos_equipes = [17, 15, 13, 12, 13]
-while True: #O usuário é apresentado a lista de equipes e a sua quantidade atual de créditos, ao escolher uma equipe a quantidade de créditos é retirada do usuário, e caso escolha uma opção que não exista ele é foeçado a responder corretamente, e se ele não tiver créditos suficientes, ele volta ao inicio do while.
-    print("=== EQUIPES DISPONÍVEIS ===")
-    for i in range(len(equipes)):
-        print(f"{equipes_num[i]}) {equipes[i]} - {precos_equipes[i]} créditos")
-    print(f"Você possui {creditos} créditos.")
-    escolha_equipe = forca_opcao(equipes_num,
-                                 "Escolha uma equipe para representar (digite o número correspondente):\n-> ")
-    indice_equipe = meu_index(equipes_num, escolha_equipe)
-    if tem_saldo(creditos, precos_equipes[indice_equipe]):
-        equipe = equipes[indice_equipe]
-        print(f"Sua equipe é a {equipe}!\n")
-        preco_equipe = precos_equipes[indice_equipe]
-        creditos -= preco_equipe
-        break
+print(Style.BRIGHT +"=== PILOTOS DISPONÍVEIS ==="+ Style.RESET_ALL)
+escolha_piloto2 = escolhendo_elemento(creditos, 'pilotos')
+piloto2 = escolha_piloto2[0]
+preco_piloto2 = escolha_piloto2[2]
+creditos = escolha_piloto2[3]
+print(f"Seu piloto 2 é o " + Style.BRIGHT + f"{piloto2}!\n"+ Style.RESET_ALL)
 
-motores = ["Porsche 99X Electric", "Mahindra M9Electro", "Jaguar I-Type 6"]
-motores_num = ["1", "2", "3"]
-precos_motores = [17, 11, 16]
-while True: #A descrição do tópico anterior será aplicada também aos motores!
-    print("=== MOTORES DISPONÍVEIS ===")
-    for i in range(len(motores)):
-        print(f"{motores_num[i]}) {motores[i]} - {precos_motores[i]} créditos")
-    print(f"Você possui {creditos} créditos.")
-    escolha_motor = forca_opcao(motores_num,
-                                "Escolha um motor para seu carro (digite o número correspondente):\n-> ")
-    indice_motor = meu_index(motores_num, escolha_motor)
-    if tem_saldo(creditos, precos_motores[indice_motor]):
-        motor = motores[indice_motor]
-        print(f"Seu motor é o {motor}!\n")
-        preco_motor = precos_motores[indice_motor]
-        creditos -= preco_motor
-        break
 
-tecnicos = ["Thomas Biermaier", "Frederic Bertrand", "Florian Modlinger"]
-tecnicos_equipe = ["ABT", "Mahindra", "Porsche"]
-tecnicos_num = ["1", "2", "3"]
-precos_tecnicos = [11, 12, 18]
-while True: #A descrição do tópico retrasado será aplicada também aos técnicos!
-    print("=== TÉCNICOS DISPONÍVEIS ===")
-    for i in range(len(tecnicos)):
-        print(f"{tecnicos_num[i]}) {tecnicos[i]}, da {tecnicos_equipe[i]} - {precos_tecnicos[i]} créditos")
-    print(f"Você possui {creditos} créditos.")
-    escolha_tecnico = forca_opcao(tecnicos_num,
-                                "Escolha um técnico para a sua equipe (digite o número correspondente):\n-> ")
-    indice_tecnico = meu_index(tecnicos_num, escolha_tecnico)
-    if tem_saldo(creditos, precos_tecnicos[indice_tecnico]):
-        tecnico = tecnicos[indice_tecnico]
-        print(f"Seu tecnico é o {tecnico}!\n")
-        preco_tecnico = precos_tecnicos[indice_tecnico]
-        creditos -= preco_tecnico
-        break
+print(Style.BRIGHT + "=== EQUIPES DISPONÍVEIS ==="+ Style.RESET_ALL)
+escolha_equipe = escolhendo_elemento(creditos, 'equipes')
+equipe = escolha_equipe[0]
+preco_equipe = escolha_equipe[2]
+creditos = escolha_equipe[3]
+print(f"Sua equipe é a " + Style.BRIGHT + f"{equipe}!\n"+ Style.RESET_ALL)
 
-print(f"Sua equipe, a {nome_equipe}, está escalada assim:\n" #Um print mostrando todas as opções escolhidas pelo usuário e sua quantidade final de créditos.
-      f"Piloto 1: {piloto1} - {preco_piloto1} créditos\n"
-      f"Piloto 2: {piloto2} - {preco_piloto2} créditos\n"
-      f"Equipe representante: {equipe} - {preco_equipe} créditos\n"
-      f"Motor: {motor} - {preco_motor} créditos\n"
-      f"Técnico: {tecnico} - {preco_tecnico} créditos\n"
-      f"Seu saldo restante é de {creditos} créditos.")
+
+print(Style.BRIGHT + "=== MOTORES DISPONÍVEIS ==="+ Style.RESET_ALL)
+escolha_motor = escolhendo_elemento(creditos, 'motores')
+motor = escolha_motor[0]
+preco_motor = escolha_motor[2]
+creditos = escolha_motor[3]
+print(f"Seu motor é o " + Style.BRIGHT + f"{motor}!\n" + Style.RESET_ALL)
+
+
+print(Style.BRIGHT + "=== TÉCNICOS DISPONÍVEIS ==="+ Style.RESET_ALL)
+escolha_tecnico = escolhendo_elemento(creditos, 'técnicos')
+tecnico = escolha_tecnico[0]
+preco_tecnico = escolha_tecnico[2]
+creditos = escolha_tecnico[3]
+print(f"Sua equipe é a "+ Style.BRIGHT + f"{tecnico}!\n" + Style.RESET_ALL)
+
+
+print(f"Sua equipe, a "+ Fore.BLUE +f"{nome_equipe}" + Style.RESET_ALL + ", está escalada assim:\n" #Um print mostrando todas as opções escolhidas pelo usuário
+      # e sua quantidade final de créditos.
+      + Style.BRIGHT +f"Piloto 1:" + Style.RESET_ALL + f"{piloto1} - {preco_piloto1} créditos\n"
+      + Style.BRIGHT +f"Piloto 2:" + Style.RESET_ALL + f" {piloto2} - {preco_piloto2} créditos\n"
+      + Style.BRIGHT +f"Equipe representante:" + Style.RESET_ALL + f" {equipe} - {preco_equipe} créditos\n"
+      + Style.BRIGHT +f"Motor:" + Style.RESET_ALL + f" {motor} - {preco_motor} créditos\n"
+      + Style.BRIGHT +f"Técnico:" + Style.RESET_ALL + f" {tecnico} - {preco_tecnico} créditos\n"
+      + Fore.YELLOW +f"Seu saldo restante é de {creditos} créditos.\n"+ Style.RESET_ALL)
+
+print("A corrida começou!!! Os resultados sairão em...")
+time.sleep(1)
+print("3")
+time.sleep(1)
+print("2")
+time.sleep(1)
+print("1")
+time.sleep(1)
+
+# Calcula a pontuação total baseada em desempenho
+pontuacao_final = calcular_pontuacao_final(escolhas_usuario)
+print(Fore.GREEN +f"\nPontuação total: {pontuacao_final} pontos"+ Style.RESET_ALL)
+
+# Gerar e mostrar o ranking
+ranking_final = gerar_ranking(pontuacao_final)
+
+# Gráfico com matplotlib mostrando as escolhas e os créditos restantes
+categorias = ['Piloto 1', 'Piloto 2', 'Equipe', 'Técnico', 'Motor']
+custos = [preco_piloto1, preco_piloto2, preco_equipe, preco_tecnico, preco_motor]
+
+plt.figure(figsize=(8, 6))
+plt.bar(categorias, custos, color='royalblue')
+plt.title('Créditos gastos por categoria')
+plt.ylabel('Créditos')
+plt.show()
+
