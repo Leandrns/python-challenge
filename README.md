@@ -99,3 +99,52 @@ E nossa solução foi desenvolver um site com uma interface rica em informaçõe
 ### Equipe
 
 <p>Após o usuário montar a sua equipe, ele poderá conferir suas escolhas.</p>
+
+### Sistema de Pontuação do Ranking
+
+<p>Como Funciona a Pontuação</p>
+
+- <p>O sistema de pontuação premia os usuários com base no desempenho real dos pilotos, equipes e técnicos escolhidos. A pontuação é atribuída em diferentes categorias, refletindo eventos que ocorrem durante as corridas da Fórmula E.</p>
+
+<p>Categorias de Pontuação</p>
+
+- <p>1. Pilotos:</p>
+- <p>Posição de Chegada:</p>
+- <p>1º lugar: 25 pontos
+2º lugar: 18 pontos
+3º lugar: 15 pontos
+4º lugar: 12 pontos
+5º lugar: 10 pontos
+6º a 10º lugar: 5 pontos
+11º a 20º lugar: 2 pontos</p>
+
+<p>2. Equipes:</p>
+
+- <p>Posição de Chegada da Equipe: Pontos atribuídos da mesma forma que para os pilotos.</p>
+- <p>Desempenho Geral (número total de pontos dos pilotos da equipe): Bônus de 10 pontos se ambos os pilotos terminarem entre os 10 primeiros.</p>
+
+<p>Técnicos:</p>
+
+- <p>Desempenho da Equipe: Os pontos são calculados com base no desempenho da equipe, com uma bonificação de 5 pontos se a equipe terminar entre os 5 primeiros.</p>
+
+<p>Exemplo de Cálculo de Pontuação</p>
+
+- <p> O usuário montou uma equipe:</p>
+
+- <p>Piloto 1: Mitch EVANS (1º lugar)
+Piloto 2: Antônio Felix DA COSTA (5º lugar)
+Equipe: Porsche (3ª posição)
+Técnico: Thomas Biermaier</p>
+
+- <p>A pontuação total será calculada:</p>
+
+- <p>Piloto 1 (Mitch EVANS): 25 pontos (1º lugar) + 2 pontos (participação) = 27 pontos
+Piloto 2 (Antônio Felix DA COSTA): 10 pontos (5º lugar) + 2 pontos (participação) = 12 pontos
+Equipe (Porsche): 15 pontos (3ª posição) + 10 pontos (bônus) = 25 pontos
+Técnico (Thomas Biermaier): 5 pontos (desempenho da equipe)
+Pontuação Total: 27 + 12 + 25 + 5 = 69 pontos</p>
+
+<p>Exibição da Pontuação</p>
+
+<p>Após a corrida, o usuário poderá visualizar seu total de pontos acumulados e um ranking que compara seu desempenho com outros usuários do "HitRace Fantasy FE". Essa comparação incentiva a otimização das escolhas e estratégias a cada corrida.</p>
+
