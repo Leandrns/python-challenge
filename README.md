@@ -31,7 +31,7 @@ E nossa solução foi desenvolver um site com uma interface rica em informaçõe
 
 - O usuário pode escolher dentro de cada tópico algumas opções váriadas, descontando a quantidade de créditos referente a cada escolha;
 
-- No final de cada experiência é demonstrado no final o saldo restante e todas as escolhas do usuário.
+- No final de cada experiência é demonstrado o ranking e o saldo restante e todas as escolhas do usuário.
  
 
 ## Requisitos
@@ -60,7 +60,7 @@ E nossa solução foi desenvolver um site com uma interface rica em informaçõe
 
 - Manipulação de listas e strings: pilotos, equipes, motores, técnicos e créditos respectivamente;
 
-- Funções: Forçar a opção do usuário, encontrar um indice dentro de uma lista, verificar se o usuário tem saldo ou não.  
+- Funções: Forçar a opção do usuário, Uso dicionarios, verificar se o usuário tem saldo ou não.  
 
 ## Instruções de uso
 
