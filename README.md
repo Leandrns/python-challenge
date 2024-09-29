@@ -16,11 +16,11 @@
 </a>
 
 ## Integrantes:
-<p>Leandro do Nascimento Souza - RM: 558893</p>
 <p>Caio Alexandre dos Santos - RM: 558460</p>
+<p>Leandro do Nascimento Souza - RM: 558893</p>
+<p>Italo Caliari Silva - RM: 554758</p>
 <p>Rafael de Mônaco Maniezo - RM: 556079</p>
 <p>Vinicius Rozas Pannuci de Paula Cont - RM: 555338</p>
-<p>Italo Caliari Silva - RM: 554758</p>
 
 ## Sobre o projeto
 O grupo CLIRV Technologies em nome da empresa Tech Mahindra, em parceria com a FIAP desafiou os alunos do primeiro ano de Engenharia de Software a popularizar a Fórmula E.<br> 
