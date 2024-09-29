@@ -179,5 +179,8 @@ E nossa solução foi desenvolver um site com uma interface rica em informaçõe
 
 <p>Após a corrida, o usuário poderá visualizar seu total de pontos acumulados e um ranking que compara seu desempenho com outros usuários do "HitRace Fantasy FE". Essa comparação incentiva a otimização das escolhas e estratégias a cada corrida.</p>
 
+### Diagrama em blocos do funcionamento
 
+![diagrama_python_pt1](https://github.com/user-attachments/assets/893a6956-e3f2-44ca-afb3-19477cb28090)
+![diagrama_python_pt2](https://github.com/user-attachments/assets/496b9709-353f-4f24-8d09-02fe7bc71977)
 
