@@ -120,6 +120,7 @@ E nossa solução foi desenvolver um site com uma interface rica em informaçõe
 <p>Como Funciona a Pontuação</p>
 
 - <p>O sistema de pontuação premia os usuários com base no desempenho real dos pilotos, equipes e técnicos escolhidos. A pontuação é atribuída em diferentes categorias, refletindo eventos que ocorrem durante as corridas da Fórmula E.</p>
+<b>OBS.:</b> O código atual gera uma pontuação aleatória para cada escolha, usando a lib random, porém, em futuras versões, essa atribuição de pontos deve ser feita da seguinte maneira: 
 
 <p>Categorias de Pontuação</p>
 
